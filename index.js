@@ -7,6 +7,7 @@ import authRouter from "./routers/auth.js";
 import todoRouter from "./routers/todo.js";
 app.use(morgan("tiny"));
 app.use(express.json());
+app.use(cors());
 mongoose
   .connect(process.env.MONGODBURI)
   .then(() => console.log("Database Connected"))

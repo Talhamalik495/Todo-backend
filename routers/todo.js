@@ -12,4 +12,11 @@ router.post("/", async (req, res) => {
     todo: todo,
   });
 });
+router.get("/", async (req, res) => {
+  res.status(201).json({
+    error: false,
+    meassege: "todo get",
+    todo: "",
+  });
+});
 export default router;
