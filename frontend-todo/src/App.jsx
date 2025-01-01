@@ -22,6 +22,15 @@ function App() {
         console.log(err);
       });
   };
+  axios
+    .post(AppRoutes.getTodo)
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
   return (
     <div className="w-screen h-screen flex justify-center items-center  flex-col gap-5">
       <h1 className="font-bold">Todo</h1>

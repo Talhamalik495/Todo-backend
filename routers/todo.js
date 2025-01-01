@@ -13,10 +13,11 @@ router.post("/", async (req, res) => {
   });
 });
 router.get("/", async (req, res) => {
+  let todo = await Todo.find();
   res.status(201).json({
     error: false,
     meassege: "todo get",
-    todo: "",
+    todo,
   });
 });
 export default router;
