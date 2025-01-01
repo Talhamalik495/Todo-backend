@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 let app = express();
 import "dotenv/config";
 import morgan from "morgan";
