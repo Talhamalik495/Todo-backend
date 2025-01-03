@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { FaEdit, FaCheck } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -12,15 +15,21 @@ function App() {
   let [todo, setTodo] = useState([]);
   let [editTodo, setEditTodo] = useState("");
   let [editText, setEditText] = useState("");
-  let eidtTodo = (id, text) => {
+  let eidtTodo = (id, update) => {
     axios
-      .patch(`${AppRoutes.editTodo}/${id}`, text)
+      .patch(`${AppRoutes.editTodo}/${id}`, update)
       .then((data) => {
         console.log("post todo=>", data);
       })
       .catch((err) => {
         console.log("err=>", err);
       }).finally;
+  };
+  let saveTodo = (id) => {
+    if (editText.trim() === "") return;
+    handleEditTodo(id, editText);
+    setEditTodo(null);
+    setEditText("");
   };
   let AddCourse = () => {
     let obj = {
@@ -90,16 +99,7 @@ function App() {
           <ul className="mt-6 space-y-3">
             {/* Task Item */}
             {todo.map((data) => {
-              return editTodo === data._id ? (
-                <input
-                  type="text"
-                  placeholder="Add a new task"
-                  className="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  onChange={(e) => {
-                    setInput(e.target.value);
-                  }}
-                />
-              ) : (
+              return (
                 <li
                   key={data._id}
                   className="flex items-center justify-between bg-gray-50 px-4 py-3 rounded-lg shadow-sm"
@@ -109,23 +109,44 @@ function App() {
                       type="checkbox"
                       className="form-checkbox h-5 w-5 text-blue-500 focus:ring-blue-400"
                     />
-                    <span className="text-gray-700">{data.todo}</span>
+                    {editTodo === data._id ? (
+                      <input
+                        type="text"
+                        placeholder="Add a new task"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        value={editText}
+                        onChange={(e) => {
+                          setEditText(e.target.value);
+                        }}
+                      />
+                    ) : (
+                      <span className="text-gray-700">{data.todo}</span>
+                    )}
                   </div>
                   <div className="flex items-center space-x-2">
+                    {editTodo === data._id ? (
+                      <button
+                        className="bg-green-500 text-white px-2 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+                        onClick={() => saveTodo(data._id)}
+                      >
+                        <FaCheck />
+                      </button>
+                    ) : (
+                      <button
+                        className="bg-green-500 text-white px-2 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+                        onClick={() => {
+                          setEditTodo(data._id);
+                          setEditText(data.todo);
+                        }}
+                      >
+                        <FaEdit />
+                      </button>
+                    )}
                     <button
-                      className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
-                      onClick={() => {
-                        setEditTodo(data._id);
-                        setEditText(data.todo);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                      className="bg-red-500 text-white px-2 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
                       onClick={() => deleteTodo(data._id)}
                     >
-                      Delete
+                      <MdDelete />
                     </button>
                   </div>
                 </li>
