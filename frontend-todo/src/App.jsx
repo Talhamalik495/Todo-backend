@@ -22,7 +22,7 @@ function App() {
     axios
       .patch(`${AppRoutes.editesTodo}/${id}`, { todo: update })
       .then((data) => {
-        console.log("patch todo=>", data);
+        getTodo();
       })
       .catch((err) => {
         console.log("err=>", err);
@@ -44,13 +44,14 @@ function App() {
     axios
       .post(AppRoutes.addTodo, obj)
       .then((data) => {
-        console.log("post todo=>", data);
+        getTodo();
       })
       .catch((err) => {
         console.log("err=>", err);
       }).finally;
   };
-  useEffect(() => {
+
+  let getTodo = () => {
     axios
       .get(AppRoutes.getTodo)
       .then((data) => {
@@ -60,14 +61,14 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  };
 
   let deleteTodo = (id) => {
     console.log("id=>", `${AppRoutes.deleteTodo}/${id}`);
     axios
       .delete(`${AppRoutes?.deleteTodo}/${id}`)
       .then((data) => {
-        console.log("delet data=>", data);
+        getTodo();
       })
       .catch((err) => {
         console.log("err=>", err);
