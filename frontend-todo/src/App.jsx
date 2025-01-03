@@ -16,6 +16,9 @@ function App() {
   let [editTodo, setEditTodo] = useState("");
   let [editText, setEditText] = useState("");
   let update = (id, update) => {
+    console.log("id", id);
+    console.log("update", update);
+
     axios
       .patch(`${AppRoutes.editesTodo}/${id}`, { todo: update })
       .then((data) => {
