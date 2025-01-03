@@ -26,6 +26,7 @@ function App() {
         console.log(err);
       });
   };
+  getTodo();
   let update = (id, update) => {
     console.log("id", id);
     console.log("update", update);
