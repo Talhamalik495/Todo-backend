@@ -27,7 +27,7 @@ function App() {
   };
   let saveTodo = (id) => {
     if (editText.trim() === "") return;
-    handleEditTodo(id, editText);
+    eidtTodo(id, editText);
     setEditTodo(null);
     setEditText("");
   };
