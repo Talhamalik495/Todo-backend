@@ -6,6 +6,7 @@ let BASE_URL = prod;
 export const AppRoutes = {
   singup: BASE_URL + "/auth/singup",
   login: BASE_URL + "/auth/login",
-  todo: BASE_URL + "/todo",
+  addTodo: BASE_URL + "/todo",
   getTodo: BASE_URL + "/todo",
+  deleteTodo: BASE_URL + "/todo",
 };
