@@ -34,14 +34,14 @@ router.patch("/:id", async (req, res) => {
   // console.log("req.todo=>", req.body.todo);
   // console.log("req.isCompleted=>", req.body.isCompleted);
 
-  if (!req.body.todo) {
+  if (!req.body.todo === undefined || req.body.todo === null) {
     return res.status(404).json({
       error: true,
       meassege: "body not found",
       todo: null,
     });
   }
-  if (!req.body.isCompleted) {
+  if (!req.body.isCompleted === undefined || req.body.isCompleted === null) {
     return res.status(404).json({
       error: true,
       meassege: "body not found",
@@ -66,8 +66,7 @@ router.delete("/:id", async (req, res) => {
 
     let dataCheck = await Todo.findById(param);
     if (!dataCheck) {
-      return;
-      res.status(404).json({
+      return res.status(404).json({
         error: true,
         meassege: "todo not found",
         todo: null,
