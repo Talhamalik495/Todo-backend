@@ -60,7 +60,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, [todo]);
+  }, []);
 
   let deleteTodo = (id) => {
     console.log("id=>", `${AppRoutes.deleteTodo}/${id}`);

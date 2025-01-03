@@ -31,8 +31,6 @@ router.patch("/:id", async (req, res) => {
       todo: null,
     });
   }
-  // console.log("req.todo=>", req.body.todo);
-  // console.log("req.isCompleted=>", req.body.isCompleted);
 
   if (!req.body.todo === undefined || req.body.todo === null) {
     return res.status(404).json({
