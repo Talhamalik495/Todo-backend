@@ -19,14 +19,16 @@ function App() {
     axios
       .patch(`${AppRoutes.editTodo}/${id}`, update)
       .then((data) => {
-        console.log("post todo=>", data);
+        console.log("patch todo=>", data);
       })
       .catch((err) => {
         console.log("err=>", err);
-      }).finally;
+      });
   };
   let saveTodo = (id) => {
     if (editText.trim() === "") return;
+    console.log("editText", editText);
+
     eidtTodo(id, editText);
     setEditTodo(null);
     setEditText("");
@@ -63,7 +65,6 @@ function App() {
       .delete(`${AppRoutes?.deleteTodo}/${id}`)
       .then((data) => {
         console.log("delet data=>", data);
-        // setTodo([...data.data.todo]);
       })
       .catch((err) => {
         console.log("err=>", err);
@@ -105,10 +106,10 @@ function App() {
                   className="flex items-center justify-between bg-gray-50 px-4 py-3 rounded-lg shadow-sm"
                 >
                   <div className="flex items-center space-x-3">
-                    <input
+                    {/* <input
                       type="checkbox"
                       className="form-checkbox h-5 w-5 text-blue-500 focus:ring-blue-400"
-                    />
+                    /> */}
                     {editTodo === data._id ? (
                       <input
                         type="text"
