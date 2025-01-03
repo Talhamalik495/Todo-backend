@@ -9,5 +9,5 @@ export const AppRoutes = {
   addTodo: BASE_URL + "/todo",
   getTodo: BASE_URL + "/todo",
   deleteTodo: BASE_URL + "/todo",
-  editTodo: BASE_URL + "/todo",
+  editesTodo: BASE_URL + "/todo",
 };

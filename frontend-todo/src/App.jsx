@@ -15,9 +15,9 @@ function App() {
   let [todo, setTodo] = useState([]);
   let [editTodo, setEditTodo] = useState("");
   let [editText, setEditText] = useState("");
-  let eidtTodo = (id, update) => {
+  let update = (id, update) => {
     axios
-      .patch(`${AppRoutes.editTodo}/${id}`, update)
+      .patch(`${AppRoutes.editesTodo}/${id}`, { update })
       .then((data) => {
         console.log("patch todo=>", data);
       })
@@ -29,7 +29,7 @@ function App() {
     if (editText.trim() === "") return;
     console.log("editText", editText);
 
-    eidtTodo(id, editText);
+    update(id, editText);
     setEditTodo(null);
     setEditText("");
   };
