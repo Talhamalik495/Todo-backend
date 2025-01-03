@@ -22,7 +22,7 @@ function App() {
       })
       .catch((err) => {
         console.log("err=>", err);
-      });
+      }).finally;
   };
   useEffect(() => {
     axios
@@ -34,6 +34,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+    setInput("");
   }, [todo]);
 
   let deleteTodo = (id) => {
