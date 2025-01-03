@@ -10,6 +10,18 @@ import SingupForm from "./components/SingupForm";
 function App() {
   let [input, setInput] = useState("");
   let [todo, setTodo] = useState([]);
+  let [editTodo, setEditTodo] = useState("");
+  let [editText, setEditText] = useState("");
+  let eidtTodo = (id, text) => {
+    axios
+      .patch(`${AppRoutes.editTodo}/${id}`, text)
+      .then((data) => {
+        console.log("post todo=>", data);
+      })
+      .catch((err) => {
+        console.log("err=>", err);
+      }).finally;
+  };
   let AddCourse = () => {
     let obj = {
       todo: input,
@@ -78,7 +90,16 @@ function App() {
           <ul className="mt-6 space-y-3">
             {/* Task Item */}
             {todo.map((data) => {
-              return (
+              return editTodo === data._id ? (
+                <input
+                  type="text"
+                  placeholder="Add a new task"
+                  className="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={(e) => {
+                    setInput(e.target.value);
+                  }}
+                />
+              ) : (
                 <li
                   key={data._id}
                   className="flex items-center justify-between bg-gray-50 px-4 py-3 rounded-lg shadow-sm"
@@ -91,7 +112,13 @@ function App() {
                     <span className="text-gray-700">{data.todo}</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <button className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
+                    <button
+                      className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+                      onClick={() => {
+                        setEditTodo(data._id);
+                        setEditText(data.todo);
+                      }}
+                    >
                       Edit
                     </button>
                     <button
