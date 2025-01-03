@@ -25,14 +25,14 @@ router.patch("/:id", async (req, res) => {
   let dataCheck = await Todo.findById(param);
   console.log("dataCheck=>", dataCheck);
   if (!dataCheck) {
-    res.status(404).json({
+    return res.status(404).json({
       error: true,
       meassege: "data not found db",
       todo: null,
     });
   }
-  console.log("req.todo=>", req.body.todo);
-  console.log("req.isCompleted=>", req.body.isCompleted);
+  // console.log("req.todo=>", req.body.todo);
+  // console.log("req.isCompleted=>", req.body.isCompleted);
 
   if (!req.body.todo) {
     return res.status(404).json({
