@@ -15,6 +15,17 @@ function App() {
   let [todo, setTodo] = useState([]);
   let [editTodo, setEditTodo] = useState("");
   let [editText, setEditText] = useState("");
+  let getTodo = () => {
+    axios
+      .get(AppRoutes.getTodo)
+      .then((data) => {
+        console.log("get todo=>", data);
+        setTodo([...data.data.todo]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   let update = (id, update) => {
     console.log("id", id);
     console.log("update", update);
@@ -22,7 +33,7 @@ function App() {
     axios
       .patch(`${AppRoutes.editesTodo}/${id}`, { todo: update })
       .then((data) => {
-        getTodo();
+        return getTodo();
       })
       .catch((err) => {
         console.log("err=>", err);
@@ -44,23 +55,11 @@ function App() {
     axios
       .post(AppRoutes.addTodo, obj)
       .then((data) => {
-        getTodo();
+        return getTodo();
       })
       .catch((err) => {
         console.log("err=>", err);
       }).finally;
-  };
-
-  let getTodo = () => {
-    axios
-      .get(AppRoutes.getTodo)
-      .then((data) => {
-        console.log("get todo=>", data);
-        setTodo([...data.data.todo]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   let deleteTodo = (id) => {
@@ -68,7 +67,7 @@ function App() {
     axios
       .delete(`${AppRoutes?.deleteTodo}/${id}`)
       .then((data) => {
-        getTodo();
+        return getTodo();
       })
       .catch((err) => {
         console.log("err=>", err);
