@@ -8,11 +8,13 @@ import authRouter from "./routers/auth.js";
 import todoRouter from "./routers/todo.js";
 import userInfo from "./routers/userInfo.js";
 app.use(morgan("tiny"));
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-  })
-);
+app.use(cors());
+app.use(cors("*"));
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//   })
+// );
 app.use(express.json());
 
 mongoose

@@ -31,8 +31,7 @@ router.patch("/:id", async (req, res) => {
       todo: null,
     });
   }
-  // app.use(cors());
-  // app.use(cors("*"));
+
   if (!req.body.todo === undefined || req.body.todo === null) {
     return res.status(404).json({
       error: true,
