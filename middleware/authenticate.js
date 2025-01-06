@@ -1,5 +1,5 @@
 import Singup from "../moduls/singup";
-
+import "dotenv/config";
 function authenticate(req, res, next) {
   let bearerToken = req.headers.authorization;
   if (!bearerToken) {
