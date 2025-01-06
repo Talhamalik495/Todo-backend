@@ -10,7 +10,7 @@ function authenticate(req, res, next) {
     });
 
     let token = bearerToken.split(" ")[1];
-    let decoded = jwt.verify(token, process.env.SECRET_KEY);
+    let decoded = jwt.verify(token, process.env.AUTH_SECRET);
     if (decoded) {
       let user = Singup.findById(decoded._id);
       if (user) {
