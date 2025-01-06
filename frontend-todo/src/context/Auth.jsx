@@ -4,6 +4,8 @@ import Cookies from "js-cookie";
 import axios from "axios";
 export const authContext = createContext();
 function Auth({ children }) {
+  let [user, setUser] = useState("");
+
   useEffect(() => {
     let token = Cookies.get("token");
     if (token) {
@@ -14,14 +16,13 @@ function Auth({ children }) {
     axios
       .get(AppRoutes.userInfo, {
         headers: {
-          Authorization: `Bearer ${Cookies.get("token")}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((data) => {
         setUser(data.data.data);
       });
   };
-  let [user, setUser] = useState("ttttttttttttt");
   return (
     <authContext.Provider value={{ user, setUser }}>
       {children}
