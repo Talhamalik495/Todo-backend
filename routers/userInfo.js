@@ -20,3 +20,5 @@ router.get("/", authenticate, (req, res) => {
     });
   }
 });
+
+export default router;
