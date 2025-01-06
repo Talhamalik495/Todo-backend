@@ -10,4 +10,5 @@ export const AppRoutes = {
   getTodo: BASE_URL + "/todo",
   deleteTodo: BASE_URL + "/todo",
   editesTodo: BASE_URL + "/todo",
+  userInfo: BASE_URL + "/userInfo",
 };

@@ -6,6 +6,7 @@ import morgan from "morgan";
 import mongoose from "mongoose";
 import authRouter from "./routers/auth.js";
 import todoRouter from "./routers/todo.js";
+import userInfo from "./routers/userInfo.js";
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(cors());
@@ -18,4 +19,5 @@ app.get("/", (req, res) => {
 });
 app.use("/auth", authRouter);
 app.use("/todo", todoRouter);
+app.use("/userInfo", userInfo);
 app.listen(process.env.PORT, () => console.log("server is runing"));

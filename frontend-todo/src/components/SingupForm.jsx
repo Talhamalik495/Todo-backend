@@ -1,14 +1,31 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { AppRoutes } from "../constant/constant";
+import { authContext } from "../context/Auth";
+
 function SingupForm() {
+  let { user, setUser } = useContext(authContext);
+
   let [name, setName] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   console.log(name, email, password);
 
   let handleSingup = () => {
-    axios.post(AppRoutes.singup)
+    let obj = {
+      name,
+      email,
+      password,
+    };
+    axios
+      .post(AppRoutes.singup, obj)
+      .then((data) => {
+        console.log("DATA", data);
+        setUser(data.data.data);
+      })
+      .catch((error) => {
+        console.log("error=>", error);
+      });
   };
   return (
     <section className="flex justify-center">
@@ -54,7 +71,7 @@ function SingupForm() {
           />
         </div>
         <button
-          className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+          className="text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg"
           onClick={handleSingup}
         >
           Singup

@@ -47,6 +47,8 @@ router.post("/singup", async (req, res) => {
 router.post("/login", async (req, res) => {
   let { error, value } = loginSchema.validate(req.body);
   console.log("errorrrrrrrrrrr=>", error);
+  console.log("value", value);
+
   if (error) {
     return res.status(400).json({
       error: true,
@@ -63,7 +65,6 @@ router.post("/login", async (req, res) => {
     });
   }
   let isPasswordValid = await bcrypt.compare(value.password, user.password);
-  console.log("isPasswordValid=>", isPasswordValid);
 
   if (!isPasswordValid) {
     return res.status(400).json({
