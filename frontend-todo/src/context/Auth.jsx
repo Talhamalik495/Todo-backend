@@ -14,7 +14,7 @@ function Auth({ children }) {
   }, []);
   let userInfo = (token) => {
     axios
-      .get(AppRoutes.userInfo, {
+      .get(AppRoutes.user, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
