@@ -9,9 +9,15 @@ import todoRouter from "./routers/todo.js";
 import userInfo from "./routers/userInfo.js";
 app.use(morgan("tiny"));
 app.use(express.json());
-app.use(cors());
-app.use(cors("*"));
+// app.use(cors());
+// app.use(cors("*"));
 
+const corsOptions = {
+  origin: "http://localhost:5173", // وہ ڈومین جسے آپ اجازت دینا چاہتے ہیں
+  optionsSuccessStatus: 200, // کچھ پرانے براؤزرز کے لیے
+};
+
+app.use(cors(corsOptions));
 mongoose
   .connect(process.env.MONGODBURI)
   .then(() => console.log("Database Connected"))
