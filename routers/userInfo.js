@@ -1,5 +1,5 @@
 import express from "express";
-import authenticate from "../middleware/authenticate";
+import authenticate from "../middleware/authenticate.js";
 import Singup from "../moduls/singup";
 
 let router = express.Router();
