@@ -2,7 +2,6 @@ import { createContext, useEffect, useState } from "react";
 import { AppRoutes } from "../constant/constant";
 import Cookies from "js-cookie";
 import axios from "axios";
-import authenticate from "../../../middleware/authenticate";
 export const authContext = createContext();
 function Auth({ children }) {
   useEffect(() => {
