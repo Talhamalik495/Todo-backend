@@ -1,4 +1,4 @@
-import Singup from "../moduls/singup";
+import Singup from "../moduls/singup.js";
 import "dotenv/config";
 
 function authenticate(req, res, next) {
