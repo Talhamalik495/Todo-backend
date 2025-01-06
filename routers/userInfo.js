@@ -4,8 +4,8 @@ import Singup from "../moduls/singup.js";
 
 let router = express.Router();
 
-router.get("/", authenticate, (req, res) => {
-  let user = Singup.findById(req._id);
+router.get("/", authenticate, async (req, res) => {
+  let user = await Singup.findById(req._id);
   if (user) {
     res.status(200).json({
       error: false,

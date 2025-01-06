@@ -1,7 +1,7 @@
 import Singup from "../moduls/singup.js";
 import "dotenv/config";
 
-function authenticate(req, res, next) {
+async function authenticate(req, res, next) {
   let bearerToken = req.headers.authorization;
   if (!bearerToken) {
     res.status(400).json({
@@ -11,9 +11,9 @@ function authenticate(req, res, next) {
     });
 
     let token = bearerToken.split(" ")[1];
-    let decoded = jwt.verify(token, process.env.AUTH_SECRET);
+    let decoded = await jwt.verify(token, process.env.AUTH_SECRET);
     if (decoded) {
-      let user = Singup.findById(decoded._id);
+      let user = await Singup.findById(decoded._id);
       if (user) {
         req.user = user;
         next();
